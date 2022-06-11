@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Front-End';
+  isLoggedIn: boolean = false;
+
+  ngOnInit(): void {
+    if(localStorage.getItem('isLoggedIn') == "true")  
+      this.isLoggedIn = true;
+  }
+
+
 }
