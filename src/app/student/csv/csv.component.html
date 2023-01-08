@@ -1,0 +1,59 @@
+<app-navbar></app-navbar>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Student CSV</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item">Others</li>
+            <li class="breadcrumb-item active">Student CSV</li>
+          </ol>
+        </nav>
+    </div>
+    
+    <section class="section profile">
+        <div class="row"> 
+            <div class="col-xl-12"> 
+                <div [ngClass]="type" role="alert" [hidden]="show" [innerHTML]="message">
+                    <!-- {{message}} -->
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Floating labels Form</h5>
+                        <form class="row g-3" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4">
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" name="degreeID" aria-label="Degree" formControlName="Degrees_id" 
+                                    [ngClass]="{ 'is-invalid': submitted && f['Degrees_id'].errors }">
+                                    <option *ngFor="let degree of allDegrees" [ngValue]="degree.id">
+                                        {{degree.name}}
+                                    </option>
+                                    </select>
+                                    <label for="floatingSelect">Degrees</label>
+                                    <div *ngIf="submitted && f['Degrees_id'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['Degrees_id'].errors['required']">Degree is required</div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="col-md-4">
+                                <input (change)="onFileChangeFromFile($event)" accept=".csv" type="file" formControlName="fileInput" 
+                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f['fileInput'].errors }"  id="inputEmail4">
+                                <div *ngIf="submitted && f['fileInput'].errors" class="invalid-feedback">
+                                    <div *ngIf="f['fileInput'].errors['required']">CSV file required</div>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Sign in</button>
+                            </div>
+                      </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

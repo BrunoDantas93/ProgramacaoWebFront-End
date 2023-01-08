@@ -1,0 +1,113 @@
+<app-navbar></app-navbar>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Courses</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item">Courses</li>
+            <li class="breadcrumb-item active">Course</li>
+          </ol>
+        </nav>
+    </div>
+    
+    <section class="section profile">
+      <div class="row">
+          <div class="col-xl-12">  
+          <div class="card">
+            <div class="card-header">
+                <ul class="nav nav-pills card-header-pills">
+                  <li class="nav-item">
+                    <a class="nav-link active" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+                      Register new Course
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <div class="nav-link">
+                        <div class="form-floating mb-3">
+                            <select class="form-select"name="degreeID" [(ngModel)]="selectedDegree" aria-label="Degree" (change)="Myfilter();">
+                            <option selected="" [value]="-1">All</option>
+                            <option *ngFor="let degree of listDegrees" [value]="degree.id">
+                                {{degree.name}}
+                            </option>
+                            </select>
+                            <label for="floatingSelect">Degrees</label>
+                        </div>
+                    </div>
+                  </li>
+                  <li class="nav-item">
+                    <div class="nav-link">
+                        <div class="form-floating mb-3">
+                            <select class="form-select"  [(ngModel)]="selectedSchoolYear" aria-label="School Year" (change)="Myfilter();">
+                            <option selected="" [value]="-1">All</option>
+                            <option *ngFor="let schoolyears of ListSchoolYears" [value]="schoolyears.id" >
+                                {{schoolyears.label}}
+                            </option>
+                            </select>
+                            <label for="floatingSelect">School Year</label>
+                        </div>
+                    </div>
+                  </li>
+                  <li class="nav-item">
+                    <div class="nav-link">
+                        <div class="mb-3">
+                            <input matInput (keyup)="applyFilter($event)" placeholder="Global search..."  class="form-control" #input>
+                        </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <table mat-table [dataSource]="dataSource" matSort>
+
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
+                    <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                  </ng-container>
+              
+                  <!-- Progress Column -->
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                  </ng-container>
+                  
+                  <ng-container matColumnDef="Degrees_id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Degree name </th>
+                    <td mat-cell *matCellDef="let row"> {{row.Dname}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="SchoolYear_id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> School Year</th>
+                    <td mat-cell *matCellDef="let row"> {{row.SchoolYear}} </td>
+                  </ng-container>
+                  
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef > Actions </th>
+                    <td mat-cell *matCellDef="let row"> 
+                      <a type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#basicModalU" (click)="setData(row)">
+                        <i class="bi bi-pencil"></i>
+                      </a>
+                      &nbsp;
+                      <a type="button" class="btn btn-warning" [routerLink]="[row.id]"><i class="bi bi-link"></i></a>
+                    </td>
+                  </ng-container>
+                 
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              
+                  <!-- Row shown when there is no matching data. -->
+                  <tr class="mat-row" *matNoDataRow><!-- 
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td> -->
+                  </tr>
+                </table>
+              
+                <mat-paginator [pageSizeOptions]="[5,10,15]" aria-label="Select page of users"></mat-paginator>
+              </div>
+          </div>
+        </div>
+      </div> 
+      <app-add-c></app-add-c>
+      <app-update-c [id]="updateData"></app-update-c>
+    </section>
+</main>

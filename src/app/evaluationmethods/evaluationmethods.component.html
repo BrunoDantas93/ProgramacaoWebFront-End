@@ -1,0 +1,75 @@
+<app-navbar></app-navbar>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Evaluation Methods</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+            <li class="breadcrumb-item">Others</li>
+            <li class="breadcrumb-item active">Evaluation Methods</li>
+          </ol>
+        </nav>
+    </div>
+    <section class="section profile">
+      <div class="row">
+          <div class="col-xl-2"></div>  
+          <div class="col-xl-8">  
+          <div class="card">
+            <div class="card-header">
+                <ul class="nav nav-pills card-header-pills">
+                    <li class="nav-item">
+                        <div class="nav-link">
+                            <a class="nav-link active" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+                                Register new Evaluation Methods
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="nav-link">
+                            <div class="mb-3">
+                                <input matInput (keyup)="applyFilter($event)" placeholder="Global search..."  class="form-control" #input>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+              </div>
+              <div class="card-body pt-3">
+                <table mat-table [dataSource]="dataSource" matSort>
+
+                  <!-- ID Column -->
+                  <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
+                    <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                  </ng-container>
+              
+                  <!-- Progress Column -->
+                  <ng-container matColumnDef="label">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Label </th>
+                    <td mat-cell *matCellDef="let row"> {{row.label}} </td>
+                  </ng-container>
+              
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef > Actions </th>
+                    <td mat-cell *matCellDef="let row"> <a type="button" (click)="setData(row)" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#basicModalU" >
+                      <i class="bi bi-pencil"></i>
+                    </a> </td>
+                  </ng-container>
+                 
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              
+                  <!-- Row shown when there is no matching data. -->
+                  <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                  </tr>
+                </table>
+              
+                <mat-paginator [pageSizeOptions]="[5,10,15]" aria-label="Select page of users"></mat-paginator>
+              </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <app-add-em></app-add-em>
+    <app-update-em [id]="updateData"></app-update-em>
+</main>

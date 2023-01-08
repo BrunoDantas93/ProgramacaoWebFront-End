@@ -1,0 +1,76 @@
+<div class="modal fade" id="basicModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add new student</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>      
+        <form class="needs-validation" [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+            <div class="modal-body">
+                <div [ngClass]="type" role="alert" [hidden]="show">
+                    {{message}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="col-12">
+                    <label for="yourName" class="form-label">Student identifier</label>
+                    <input type="text" class="form-control" formControlName="nostudent" 
+                        [ngClass]="{ 'is-invalid': submitted && f['nostudent'].errors }">
+                    <div  *ngIf="submitted && f['nostudent'].errors" class="invalid-feedback"> 
+                        <div *ngIf="f['nostudent'].errors['required']">Please, enter the student identifier!</div>
+                    </div>
+                </div>
+                &nbsp;
+                <div class="col-12">
+                    <label for="yourName" class="form-label">Student Name</label>
+                    <input type="text" class="form-control" formControlName="name" 
+                        [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">
+                    <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                        <div *ngIf="f['name'].errors['required']">Please, enter the student name!</div>
+                    </div>
+                </div> 
+                &nbsp;
+                <div class="col-12">
+                    <label for="yourName" class="form-label">Student Surname</label>
+                    <input type="text" class="form-control" formControlName="surname" 
+                        [ngClass]="{ 'is-invalid': submitted && f['surname'].errors }">
+                    <div *ngIf="submitted && f['surname'].errors" class="invalid-feedback">
+                        <div *ngIf="f['surname'].errors['required']">Please, enter the student surname!</div>
+                    </div>
+                </div> 
+                &nbsp;
+                <div class="col-12">
+                    <label for="yourUsername" class="form-label">Email</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend">@</span>
+                        <input type="text"  class="form-control" formControlName="email" 
+                            [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+                        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                            <div *ngIf="f['email'].errors['required']">Email is required</div>
+                            <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+                        </div>
+                    </div>
+                </div>                
+                &nbsp;
+                <div class="col-12">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" name="degreeID" aria-label="Degree" formControlName="Degrees_id" 
+                        [ngClass]="{ 'is-invalid': submitted && f['Degrees_id'].errors }">
+                        <option *ngFor="let degree of allDegrees" [ngValue]="degree.id">
+                            {{degree.name}}
+                        </option>
+                        </select>
+                        <label for="floatingSelect">Degrees</label>
+                    </div>
+                    <div *ngIf="submitted && f['Degrees_id'].errors" class="invalid-feedback">
+                        <div *ngIf="f['Degrees_id'].errors['required']">Degree is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
+    </div>
+    </div>
+  </div><!-- End Basic Modal-->

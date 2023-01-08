@@ -1,0 +1,48 @@
+<div class="modal fade" id="basicModalRemoveStudent" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Remove student from course!!</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>   
+        <div class="modal-body">
+          <div [ngClass]="type" role="alert" [hidden]="show">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>   
+          <div class="container">
+            <div class="row justify-content-md-center">
+              <div class="col col-lg-2">
+              </div>
+              <div class="col-md-auto">
+                <h2>Alert!!</h2>
+              </div>
+              <div class="col col-lg-2">
+              </div>
+            </div>
+            <div class="row justify-content-md-center">
+              <div class="col col-lg-2">
+              </div>
+              <div class="col-md-auto">
+                <h1><i class="bi bi-exclamation-octagon bi-10x" style="color:red; font-size:80px;"></i></h1>
+              </div>
+              <div class="col col-lg-2">
+              </div>
+            </div>
+            <div class="row justify-content-md-center">
+              <div class="col col-lg-2">
+              </div>
+              <div class="col-md-auto">
+                <h2>Removing this student from the course will remove all their data as well.</h2>
+              </div>
+              <div class="col col-lg-2">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" (click)="delete()">Remove student from course </button>
+        </div>
+    </div>
+</div>

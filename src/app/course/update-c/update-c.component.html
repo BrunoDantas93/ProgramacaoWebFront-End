@@ -1,0 +1,62 @@
+
+<div class="modal fade" id="basicModalU" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Update Course {{listEnrolled.length}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>      
+        <form class="needs-validation" [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+            <div class="modal-body">
+                <div [ngClass]="type" role="alert" [hidden]="show">
+                    {{message}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>   
+                <div class="col-12">
+                    <label for="yourName" class="form-label">Course Name</label>
+                    <input type="text" class="form-control" formControlName="name"  
+                        [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">
+                    <div  *ngIf="submitted && f['name'].errors" class="invalid-feedback"> 
+                        <div *ngIf="f['name'].errors['required']">Please, enter the name of Course!</div>
+                    </div>
+                </div>             
+                &nbsp;
+                <div class="col-12">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" name="degreeID" aria-label="Degree" formControlName="Degrees_id" 
+                        [ngClass]="{ 'is-invalid': submitted && f['Degrees_id'].errors }">
+                        <option *ngFor="let degree of listDegrees" [ngValue]="degree.id">
+                            {{degree.name}}
+                        </option>
+                        </select>
+                        <label for="floatingSelect">Degrees</label>
+                        <div *ngIf="submitted && f['Degrees_id'].errors" class="invalid-feedback">
+                            <div *ngIf="f['Degrees_id'].errors['required']">Degree is required</div>
+                        </div>
+                    </div>
+                </div>                          
+                &nbsp;
+                <div class="col-12">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" name="schoolYearID" aria-label="Degree" formControlName="SchoolYear_id" 
+                        [ngClass]="{ 'is-invalid': submitted && f['SchoolYear_id'].errors }">
+                        <option *ngFor="let sy of ListSchoolYears" [ngValue]="sy.id">
+                            {{sy.label}}
+                        </option>
+                        </select>
+                        <label for="floatingSelect">School Year</label>
+                        <div *ngIf="submitted && f['Degrees_id'].errors" class="invalid-feedback">
+                            <div *ngIf="f['Degrees_id'].errors['required']">The School Year is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div><!-- End Basic Modal-->
+  

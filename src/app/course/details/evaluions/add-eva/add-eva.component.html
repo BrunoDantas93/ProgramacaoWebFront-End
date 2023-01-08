@@ -1,0 +1,47 @@
+<div class="modal fade" id="basicModalAddEva" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Add a new Evaluation Method</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>   
+        <form class="needs-validation" [formGroup]="quotationForm" (ngSubmit)="onSubmit()">
+          <div class="modal-body">
+              <div [ngClass]="type" role="alert" [hidden]="show">
+                  {{message}}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div> 
+              <div class="col-12">
+                <label for="yourName" class="form-label">Evaluation Methods</label>
+                <div class="form-floating mb-3">
+                    <select class="form-select" name="EvaluationMethods" aria-label="EvaluationMethods" formControlName="EvaluationMethods_id" 
+                    [ngClass]="{ 'is-invalid': submitted && f['EvaluationMethods_id'].errors }">
+                    <option *ngFor="let eva of listAllEvalutionMethods" [ngValue]="eva.id">
+                        {{eva.label}}
+                    </option>
+                    </select>
+                    <label for="floatingSelect">Evaluation Methods</label>
+                    <div *ngIf="submitted && f['EvaluationMethods_id'].errors" class="invalid-feedback" >
+                        <div *ngIf="f['EvaluationMethods_id'].errors['required']">Evaluation Methods is required</div>
+                    </div>
+                </div>
+            </div> 
+            &nbsp;  
+            <div class="col-12">
+              <label for="yourName" class="form-label">Percentage</label>
+              <input type="number" class="form-control" formControlName="percentage"
+                  [ngClass]="{ 'is-invalid': submitted && f['percentage'].errors }" step="0.01" min="0" max="{{max}}">
+              <div  *ngIf="submitted && f['percentage'].errors" class="invalid-feedback"> 
+                  <div *ngIf="f['percentage'].errors['required']">Please, enter the value of how much this evaluation Method is worth!</div>
+                  <div *ngIf="f['percentage'].errors['max']">The maximum value that can be assigned to this Evaluation Method is [{{max}}]!</div>
+                  <div *ngIf="f['percentage'].errors['min']">The minimum value that can be assigned to this Evaluation Method is [0]!</div>
+              </div>
+            </div>         
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+    </div>
+</div>

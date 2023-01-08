@@ -1,0 +1,93 @@
+<div class="row justify-content-md-center">
+    <div class="col col-lg-8">
+        <div class="card">
+            &nbsp;
+            <div class="card-body">
+                <div class="row justify-content-md-center">
+                    <ul class="nav nav-pills card-header-pills">
+                        <li class="nav-item">
+                            <div class="nav-link">
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#basicModalSummary"> <i class="bi bi-plus-square"></i> </button>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="nav-link">
+                                <button class="btn btn-outline-warning" (click)="clearSearch();"> <i class="bi bi-recycle"></i></button>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="nav-link">
+                                <div class="mb-3">
+                                <input type="date" matInput (change)="applyDateFilter($event)" placeholder="Global search..."  class="form-control" #dateinput>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <mat-paginator  [length]="listSummaries.length"
+                                    [pageSize]="5"
+                                    [pageSizeOptions]="[5,10,15]" 
+                                    (page)="onPageChange($event)"
+                                    aria-label="Select page of users">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-md-center"  *ngFor="let summary of pageSlice">
+    <div class="col col-lg-8">
+        <div class="card">
+           <div class="card-header">
+                <div class="row">                           
+                    <div class="col-6 col-md-6"><h3>{{summary.title}}</h3></div>
+                    <div class="col-lg-6 col-md-6"  >
+                        <ul class="nav nav-pills card-header-pills" style="display: flex; justify-content: right; list-style-type: none;">
+                            <li class="nav-item">
+                                <div class="nav-link" style="text-align: right;">
+                                    <h3>{{convertDate(summary.date)}}</h3>  
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <ul class="d-flex align-items-center" style="list-style-type: none;">
+                                    <li class="nav-item dropdown pe-3">                                
+                                        <a class="nav-link d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                            <li>
+                                                <a class="dropdown-item d-flex align-items-center" type="button" 
+                                                data-bs-toggle="modal" data-bs-target="#basicModalR" (click)="setData(summary)">
+                                                    <i class="bi bi-trash"></i>
+                                                    <span>Delete summary</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item d-flex align-items-center" type="button"
+                                                data-bs-toggle="modal" data-bs-target="#basicModalE" (click)="setData(summary)">
+                                                    <i class="bi bi-pencil"></i>
+                                                    <span>Edit summary</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>    
+                            </li>
+                        </ul>            
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row justify-content-md-center"  [innerHTML]="summary.description"></div>
+            </div>
+            <div class="card-footer">
+                Footer
+            </div>
+        </div>
+    </div>
+</div>
+<app-add-summary [id]="Course_ID"></app-add-summary>
+<app-update-summary [id]="updateData"></app-update-summary>
+<app-delete-summary [id]="updateData"></app-delete-summary> 

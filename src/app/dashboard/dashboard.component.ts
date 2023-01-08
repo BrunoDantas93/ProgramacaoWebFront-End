@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
-
+import { Teacher } from '../interface/teacher.model'
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -14,8 +14,7 @@ export class DashboardComponent implements OnInit {
   constructor(private router: Router, private authService: AuthService) { }  
   
   ngOnInit() {  
-    this.id = localStorage.getItem('token');  
-    //console.log(this.id);  
+    this.id = localStorage.getItem('token');
   }  
   
   logout() {  

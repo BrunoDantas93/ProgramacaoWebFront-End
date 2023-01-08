@@ -1,0 +1,48 @@
+<div class="modal fade" id="basicModalGrades" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h2 class="modal-title">Add or change a student assessment.</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div> 
+        <form class="needs-validation" [formGroup]="assamentsForm" (ngSubmit)="onSubmit()">
+          <div class="modal-body">
+              <div [ngClass]="type" role="alert" [hidden]="show">
+                  {{message}}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div> 
+              <div class="col-12">
+                <label for="yourName" class="form-label">Quotation</label>
+                <div class="form-floating mb-3">
+                    <select class="form-select" name="Quotation_id" aria-label="Quotation_id" formControlName="Quotation_id" 
+                    [ngClass]="{ 'is-invalid': submitted && f['Quotation_id'].errors }" (change)="onChange()">
+                      <option *ngFor="let qua of listAllQuotation" [ngValue]="qua.id">
+                          {{getEvaluationMethod(qua.EvaluationMethods_id)[0].label}} - {{qua.percentage}}%
+                      </option>
+                    </select>
+                    <label for="floatingSelect">Quotation</label>
+                    <div *ngIf="submitted && f['Quotation_id'].errors" class="invalid-feedback" >
+                        <div *ngIf="f['Quotation_id'].errors['required']">Quotation is required</div>
+                    </div>
+                </div>
+              </div>
+              &nbsp;  
+              <div class="col-12">
+                <label for="yourName" class="form-label">Assessment result</label>
+                <input type="number" class="form-control" formControlName="Grade"
+                    [ngClass]="{ 'is-invalid': submitted && f['Grade'].errors }" step="0.01" min="0" max="20">
+                <div  *ngIf="submitted && f['Grade'].errors" class="invalid-feedback"> 
+                  <div *ngIf="f['Grade'].errors['required']">Please. enter the student's result in this assessment!</div>
+                  <div *ngIf="f['Grade'].errors['max']">The maximum value that can be assigned to this assessment is 20!</div>
+                  <div *ngIf="f['Grade'].errors['min']">The minimum value that can be assigned to this assessment is [0]!</div>
+                </div>
+              </div>         
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+    </div>
+</div>
+</div>
