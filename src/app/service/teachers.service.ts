@@ -8,7 +8,8 @@ import { Teacher } from '../interface/teacher.model'
   providedIn: 'root'
 })
 export class TeachersService {
-  apiUrl = 'http://localhost:8080/teachers';
+  apiUrl = 'https://localhost:7051/api/User';
+  //apiUrl = 'http://localhost:8080/teachers';
   constructor(private _http: HttpClient) { }
 
   createTeacher(data:any):Observable<Teacher>{
@@ -16,7 +17,7 @@ export class TeachersService {
   }
 
   loginTeacher(data:any):Observable<any>{
-    return this._http.post(`${this.apiUrl}/login`, data);
+    return this._http.post(`${this.apiUrl}/Login`, data);
   }
 
   tstemail(email:any):Observable<Teacher>{
