@@ -63,20 +63,14 @@ export class LoginComponent implements OnInit {
     
     this.service.loginTeacher(this.loginForm.value).subscribe({
       next: data => {
-        console.log(data);
         this.onReset();
-        localStorage.setItem('isLoggedIn', "true");
-        localStorage.setItem('token', data.accessToken)
-        this.router.navigate([this.returnUrl])
-
-        /*this.onReset();
         localStorage.setItem('isLoggedIn', "true");
         localStorage.setItem('token', data.id);  
         localStorage.setItem('name', data.name); 
         localStorage.setItem('surname', data.surname); 
         localStorage.setItem('email', data.email);  
         localStorage.setItem('noteacher', data.noteacher);  
-        this.router.navigate([this.returnUrl]);*/
+        this.router.navigate([this.returnUrl]);
       },
       error: error => {
         this.type = 'alert alert-danger alert-dismissible fade show';
